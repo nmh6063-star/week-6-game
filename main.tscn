@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://cysw353i8eklo" path="res://assets/Puter.png" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bplx5o454154" path="res://scripts/clicker.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://b1ti5dggvo4o6" path="res://scripts/canvas_script.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://brps2ypi3vr3p" path="res://scripts/drawing.gd" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://co2301d2tye5n" path="res://scripts/camera_script.gd" id="4_lquwl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 
@@ -20,44 +22,48 @@ size = Vector2(574, 574)
 
 [node name="Node2D" type="Node2D" unique_id=450619373]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1946402372]
+[node name="Border" type="StaticBody2D" parent="." unique_id=1946402372]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1847113423]
+[node name="BorderBottom" type="CollisionShape2D" parent="Border" unique_id=1847113423]
 position = Vector2(0, 324)
 shape = SubResource("WorldBoundaryShape2D_h2yge")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=691915553]
+[node name="BorderTop" type="CollisionShape2D" parent="Border" unique_id=691915553]
 position = Vector2(1, -540)
 shape = SubResource("WorldBoundaryShape2D_1bvp3")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1651982932]
+[node name="BorderLeft" type="CollisionShape2D" parent="Border" unique_id=1651982932]
 position = Vector2(-959, 0)
 shape = SubResource("WorldBoundaryShape2D_lquwl")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1227670929]
+[node name="BorderRight" type="CollisionShape2D" parent="Border" unique_id=1227670929]
 position = Vector2(960, 1)
 shape = SubResource("WorldBoundaryShape2D_7mycd")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1255901693]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1255901693]
 position = Vector2(0, 200)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("2_0xm2m")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1785363596]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Player" unique_id=1785363596]
 position = Vector2(0, -286)
 shape = SubResource("RectangleShape2D_h2yge")
 
-[node name="Area2D" type="Area2D" parent="CharacterBody2D" unique_id=1921778025]
+[node name="Area2D" type="Area2D" parent="Player" unique_id=1921778025]
 position = Vector2(0, -286)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D" unique_id=1033076675]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" unique_id=1033076675]
 shape = SubResource("RectangleShape2D_h2yge")
 
-[node name="Computer" type="Sprite2D" parent="CharacterBody2D" unique_id=259497910]
+[node name="Computer" type="Sprite2D" parent="Player" unique_id=259497910]
 texture = ExtResource("1_ig7tw")
 offset = Vector2(0, -287)
 
+[node name="Drawing" type="Node2D" parent="." unique_id=1452194509]
+script = ExtResource("4_1bvp3")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2118857758]
+script = ExtResource("4_lquwl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1242209693]
 script = ExtResource("3_h2yge")
@@ -93,6 +99,29 @@ theme_override_constants/margin_right = 100
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer2" unique_id=2049481310]
 layout_mode = 2
 bbcode_enabled = true
+text = "combo"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer" unique_id=957508603]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 450
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer3" unique_id=38743191]
+layout_mode = 2
+bbcode_enabled = true
+text = "test"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 2
