@@ -10,7 +10,7 @@ var position_start = Vector2.ZERO
 var position_end = Vector2.ZERO
 var vector = Vector2.ZERO
 
-var mode = 1
+var mode = 0
 
 func _physics_process(delta):
 	# get the Physics2DDirectSpaceState object
@@ -50,7 +50,6 @@ func _physics_process(delta):
 		#clicked = false
 		position_end = mousePos
 		vector = clamp(-(position_end - position_start), Vector2.ZERO, Vector2(20.0, 20.0))
-		update()
 	var sprite = get_node("Computer")
 	if self.position.y < bound:
 		var gravity = get_gravity()
