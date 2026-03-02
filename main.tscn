@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://cqqkn2ouybgke"]
+
+[ext_resource type="Texture2D" uid="uid://cysw353i8eklo" path="res://assets/Puter.png" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bplx5o454154" path="res://scripts/clicker.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://b1ti5dggvo4o6" path="res://scripts/canvas_script.gd" id="3_h2yge"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1bvp3"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lquwl"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7mycd"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(574, 574)
+
+[node name="Node2D" type="Node2D" unique_id=450619373]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1946402372]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1847113423]
+position = Vector2(0, 324)
+shape = SubResource("WorldBoundaryShape2D_h2yge")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=691915553]
+position = Vector2(1, -540)
+shape = SubResource("WorldBoundaryShape2D_1bvp3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1651982932]
+position = Vector2(-959, 0)
+shape = SubResource("WorldBoundaryShape2D_lquwl")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1227670929]
+position = Vector2(960, 1)
+shape = SubResource("WorldBoundaryShape2D_7mycd")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1255901693]
+position = Vector2(0, 200)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("2_0xm2m")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1785363596]
+position = Vector2(0, -286)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D" unique_id=1921778025]
+position = Vector2(0, -286)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D" unique_id=1033076675]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="Computer" type="Sprite2D" parent="CharacterBody2D" unique_id=259497910]
+texture = ExtResource("1_ig7tw")
+offset = Vector2(0, -287)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2118857758]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1242209693]
+script = ExtResource("3_h2yge")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=338304668]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer" unique_id=161373058]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Score"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer" unique_id=5723307]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_right = 100
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer2" unique_id=2049481310]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
