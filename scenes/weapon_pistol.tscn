@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bpt6p4b6g3ryt"]
+
+[ext_resource type="Script" uid="uid://bjne2f03patu4" path="res://scenes/weapon_pistol.gd" id="1_script"]
+[ext_resource type="SpriteFrames" uid="uid://brfuog8ya5r3k" path="res://assets/weapons/pistol/new_sprite_frames.tres" id="2_i64ra"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i64ra"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tlb7k"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_s2bpn"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e65k8"]
+normal = Vector2(-1, 0)
+
+[node name="WeaponPistol" type="Node2D" unique_id=2037980163]
+script = ExtResource("1_script")
+
+[node name="PistolSprite" type="AnimatedSprite2D" parent="." unique_id=1670843803]
+position = Vector2(2, 150)
+sprite_frames = ExtResource("2_i64ra")
+animation = &"idle"
+
+[node name="Border" type="StaticBody2D" parent="." unique_id=1269743103]
+
+[node name="BorderBottom" type="CollisionShape2D" parent="Border" unique_id=517370514]
+position = Vector2(0, 324)
+shape = SubResource("WorldBoundaryShape2D_i64ra")
+
+[node name="BorderTop" type="CollisionShape2D" parent="Border" unique_id=513254394]
+position = Vector2(1, -540)
+shape = SubResource("WorldBoundaryShape2D_tlb7k")
+
+[node name="BorderLeft" type="CollisionShape2D" parent="Border" unique_id=268444075]
+position = Vector2(-959, 0)
+shape = SubResource("WorldBoundaryShape2D_s2bpn")
+
+[node name="BorderRight" type="CollisionShape2D" parent="Border" unique_id=200941818]
+position = Vector2(960, 1)
+shape = SubResource("WorldBoundaryShape2D_e65k8")
