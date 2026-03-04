@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var aname : Label = $AchievementName
 @onready var atext : Label = $AchievementText
@@ -17,10 +17,14 @@ func _ready() -> void:
 	aname.text = names.pop_front()
 	atext.text = "Reach a score of " + str(scores.pop_front())
 	
-func _process(delta: float) -> void:
-	position += position.direction_to(destination) * SPEED * delta
+func _physics_process(delta: float) -> void:
+	if position.y < destination.y + 1.0 and position.y > destination.y - 1.0:
+		position = destination
+	else:
+		position += position.direction_to(destination) * SPEED * delta
 	
 func display() -> void:
+	self.visible = true
 	next_score = scores[0]
 	destination = position - Vector2(0, 300)
 	await get_tree().create_timer(2).timeout
@@ -31,4 +35,4 @@ func display() -> void:
 	if scores.is_empty():
 		scores.append(next_score * 10)
 		names.append(str(next_score) + "!")
-	pass
+	self.visible = false

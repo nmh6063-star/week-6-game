@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://cqqkn2ouybgke"]
 
+[ext_resource type="Texture2D" uid="uid://drls4os2rk5ic" path="res://assets/Office.png" id="1_5vw27"]
 [ext_resource type="Texture2D" uid="uid://cysw353i8eklo" path="res://assets/Puter.png" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bplx5o454154" path="res://scripts/clicker.gd" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://j2hs4f4clwso" path="res://assets/Black_colour.jpg" id="2_dg77c"]
 [ext_resource type="Script" uid="uid://b1ti5dggvo4o6" path="res://scripts/canvas_script.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://brps2ypi3vr3p" path="res://scripts/drawing.gd" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://co2301d2tye5n" path="res://scripts/camera_script.gd" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bqkfqvn7e4dku" path="res://scenes/achievement_manager.tscn" id="6_7mycd"]
+[ext_resource type="Texture2D" uid="uid://bs3hubedgsn4u" path="res://assets/punch.png" id="7_272bh"]
+[ext_resource type="Theme" uid="uid://bqdn1hl5c7fvl" path="res://assets/space-worm-theme/space_worm_theme.tres" id="8_4c57u"]
+[ext_resource type="Texture2D" uid="uid://b6dy30wwmhony" path="res://assets/Bat.png" id="9_kek77"]
+[ext_resource type="Texture2D" uid="uid://dbjehqnufhgkq" path="res://assets/throw.png" id="10_efxa6"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 
@@ -22,6 +28,15 @@ normal = Vector2(-1, 0)
 size = Vector2(574, 574)
 
 [node name="Node2D" type="Node2D" unique_id=450619373]
+
+[node name="office" type="Sprite2D" parent="." unique_id=640592707]
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("1_5vw27")
+
+[node name="black" type="Sprite2D" parent="." unique_id=1224400571]
+modulate = Color(1, 1, 1, 0.39215687)
+scale = Vector2(10, 5)
+texture = ExtResource("2_dg77c")
 
 [node name="Border" type="StaticBody2D" parent="." unique_id=1946402372]
 
@@ -70,7 +85,11 @@ script = ExtResource("4_lquwl")
 script = ExtResource("3_h2yge")
 
 [node name="AchievementManager" parent="CanvasLayer" unique_id=1789878873 instance=ExtResource("6_7mycd")]
-position = Vector2(1523, 1096)
+visible = false
+offset_left = 1523.0
+offset_top = 1096.0
+offset_right = 1523.0
+offset_bottom = 1096.0
 scale = Vector2(0.2, 0.2)
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=338304668]
@@ -131,3 +150,242 @@ fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Shop" type="Control" parent="CanvasLayer" unique_id=877943886]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Shop" unique_id=1037518042]
+custom_minimum_size = Vector2(2000, 1100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("8_4c57u")
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Shop" unique_id=1119051496]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.2800006, 1.5600003)
+theme = ExtResource("8_4c57u")
+theme_override_constants/h_separation = 100
+theme_override_constants/v_separation = 50
+columns = 4
+
+[node name="0" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=806617119]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Shop/GridContainer/0" unique_id=2069236158]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.5
+offset_top = 10.0
+offset_right = 24.5
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "Punch"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Shop/GridContainer/0" unique_id=1984738492]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_272bh")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Shop/GridContainer/0" unique_id=24427695]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -43.0
+offset_right = 50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Select"
+
+[node name="1" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=1676437770]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Shop/GridContainer/1" unique_id=1495305977]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.5
+offset_top = 10.0
+offset_right = 24.5
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "Throw"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Shop/GridContainer/1" unique_id=1282106369]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_efxa6")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Shop/GridContainer/1" unique_id=1173081744]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -43.0
+offset_right = 50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Select"
+
+[node name="3" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=1998828728]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Shop/GridContainer/3" unique_id=1774202813]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.5
+offset_top = 10.0
+offset_right = 24.5
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "Bat"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Shop/GridContainer/3" unique_id=1350257732]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_kek77")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Shop/GridContainer/3" unique_id=2125770486]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -43.0
+offset_right = 50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Select"
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=184731102]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="Panel4" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=843597278]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="Panel5" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=1068345049]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="Selected" type="Panel" parent="CanvasLayer/Shop" unique_id=750158610]
+self_modulate = Color(0.76, 0.76, 0.76, 1)
+layout_mode = 0
+offset_left = 110.0
+offset_right = 310.0
+offset_bottom = 100.0
+theme = ExtResource("8_4c57u")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Shop/Selected" unique_id=2020294501]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -20.0
+offset_right = 56.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "SELECTED"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="Shop Toggle" type="MarginContainer" parent="CanvasLayer" unique_id=2039425537]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -100.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("8_4c57u")
+theme_override_constants/margin_bottom = 0
+
+[node name="Button" type="Button" parent="CanvasLayer/Shop Toggle" unique_id=1121143185]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "/\\"

@@ -12,16 +12,20 @@ font_size = 119
 outline_size = 35
 outline_color = Color(0, 0, 0, 1)
 
-[node name="AchievementManager" type="Node2D" unique_id=1789878873]
+[node name="AchievementManager" type="Control" unique_id=375867605]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_1imxy")
 
 [node name="AchievementName" type="Label" parent="." unique_id=104870263]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 390.0
 text = "Happy anniversary"
 label_settings = SubResource("LabelSettings_1imxy")
 
 [node name="AchievementText" type="Label" parent="." unique_id=1544650606]
+layout_mode = 0
 offset_top = 415.0
 offset_right = 1920.0
 offset_bottom = 863.0

@@ -57,37 +57,74 @@ func _physics_process(delta):
 		position_end = Vector2.ZERO
 		self.position.y -= 0.1
 		velocity = Vector2.ZERO
-		velocity -= Vector2(-vector.x * force / 50, -vector.y * force / 50)
+		velocity -= Vector2(-vector.x * force / 40, -vector.y * force / 40)
 		grounded = false
 	if self.position.y < bound:
 		var gravity = get_gravity()
 		if velocity.y > 0:
 			gravity *= 2
 		velocity += gravity * delta
-		var collision = move_and_collide(velocity*delta)
-		if collision and collision.get_collider().name.contains("Border"):
-			Global.wallBounce = true
-			var collision_normal = collision.get_normal()
-			if collision_normal.y > 0.5:
-				velocity.y *= -0.75
-				Global.combo += 1
-				Global.score += 1
-				get_viewport().get_camera_2d().shake(velocity.y/700)
-			elif collision_normal.y < -0.5:
-				print("Hit from above / Ceiling")
-			elif collision_normal.x > 0.5:
-				velocity.x *= -0.75
-				Global.combo += 1
-				Global.score += 1
-			elif collision_normal.x < -0.5:
-				velocity.x *= -0.75
-				Global.combo += 1
-				Global.score += 1
-		sprite.scale.y = remap(abs(velocity.y), 0, force * 1.5, 0.95, 1.0)
-		sprite.scale.x = remap(abs(velocity.y), 0, force * 1.5, 1.05, 1.0)
+		if not Global.frozen:
+			var collision = move_and_collide(velocity*delta)
+			if velocity.length() > 0.01:
+				var target_angle = velocity.angle() + deg_to_rad(90)
+				rotation = clamp(lerp_angle(rotation, target_angle, 1.0 * delta), -PI/4, PI/4)
+			if collision and collision.get_collider().name.contains("Border"):
+				var collision_normal = collision.get_normal()
+				if collision_normal.y > 0.5:
+					velocity.y *= -0.75
+					Global.combo += 1
+					Global.score += 1
+					get_viewport().get_camera_2d().shake(abs(velocity.y)/1000)
+					Global.wallBounceDir = "U"
+					for i in range(3):
+						var inst = particles.instantiate()
+						inst.position = collision.get_position()
+						inst.position.x = inst.position.x - 100 + (100 * i)
+						var particleScript : CPUParticles2D = inst
+						particleScript.amount = clamp(abs(velocity.y)/50, 0, 25)
+						get_node("/root/Node2D").add_child(inst)
+				elif collision_normal.y < -0.5:
+					pass
+					#print("Hit from above / Ceiling")
+				elif collision_normal.x > 0.5:
+					velocity.x *= -0.9
+					Global.combo += 1
+					Global.score += 1
+					get_viewport().get_camera_2d().shake(abs(velocity.x)/1000)
+					print("left")
+					print(abs(velocity.x)/1000)
+					Global.wallBounceDir = "L"
+					for i in range(3):
+						var inst = particles.instantiate()
+						inst.position = collision.get_position()
+						inst.position.x = inst.position.x - 100 + (100 * i)
+						var particleScript : CPUParticles2D = inst
+						particleScript.amount = clamp(abs(velocity.x)/50, 0, 25)
+						get_node("/root/Node2D").add_child(inst)
+				elif collision_normal.x < -0.5:
+					velocity.x *= -0.9
+					Global.combo += 1
+					Global.score += 1
+					print("right")
+					print(velocity.x)
+					get_viewport().get_camera_2d().shake(abs(velocity.x)/1000)
+					for i in range(3):
+						var inst = particles.instantiate()
+						inst.position = collision.get_position()
+						inst.position.x = inst.position.x - 100 + (100 * i)
+						var particleScript : CPUParticles2D = inst
+						particleScript.amount = clamp(abs(velocity.x)/50, 0, 25)
+						get_node("/root/Node2D").add_child(inst)
+					Global.wallBounceDir = "R"
+				Global.wallBounce = true
+				sprite.scale.y = remap(abs(velocity.x), 0, force * 1.5, 1, 1.1)
+				sprite.scale.x = remap(abs(velocity.y), 0, force * 1.5, 1.1, 1)
+			else:
+				sprite.scale.y = remap(abs(velocity.y), 0, force * 1.5, 1, 1.1)
+				sprite.scale.x = remap(abs(velocity.y), 0, force * 1.5, 1.1, 1)
 	else:
 		if !grounded:
-			print("hit")
 			get_viewport().get_camera_2d().shake(velocity.y/2000)
 			grounded = true
 			sprite.scale.y = remap(abs(velocity.y), 0, abs(1700), 1.05, 1.85)
@@ -102,6 +139,7 @@ func _physics_process(delta):
 		velocity = Vector2.ZERO
 		self.position.y = bound
 		Global.combo = 0
+		rotation = lerp_angle(rotation, 0, 10.0 * delta)
 	
 	sprite.scale.x = lerp(sprite.scale.x, 1.0, 1.0 - pow(0.01, delta))
 	sprite.scale.y = lerp(sprite.scale.y, 1.0, 1.0 - pow(0.01, delta))
