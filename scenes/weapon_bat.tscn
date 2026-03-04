@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cqosvbdp6a3lu"]
+
+[ext_resource type="Texture2D" uid="uid://c0gr5l2q6otcp" path="res://assets/weapons/bat/bat.png" id="1_bat"]
+[ext_resource type="Script" uid="uid://b2hra5tfjpach" path="res://scenes/weapon_bat.gd" id="2_script"]
+
+[node name="WeaponBat" type="Node2D" unique_id=1698840220]
+script = ExtResource("2_script")
+
+[node name="BatSprite" type="Sprite2D" parent="." unique_id=1211258638]
+position = Vector2(470.00003, 256)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_bat")
