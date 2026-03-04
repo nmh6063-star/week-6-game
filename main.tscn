@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cqqkn2ouybgke"]
 
 [ext_resource type="Texture2D" uid="uid://drls4os2rk5ic" path="res://assets/Office.png" id="1_5vw27"]
+[ext_resource type="Script" uid="uid://dlk357irkxhik" path="res://manager.gd" id="1_82xsv"]
 [ext_resource type="Texture2D" uid="uid://cysw353i8eklo" path="res://assets/Puter.png" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bplx5o454154" path="res://scripts/clicker.gd" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://j2hs4f4clwso" path="res://assets/Black_colour.jpg" id="2_dg77c"]
@@ -9,12 +10,16 @@
 [ext_resource type="Script" uid="uid://co2301d2tye5n" path="res://scripts/camera_script.gd" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bqkfqvn7e4dku" path="res://scenes/achievement_manager.tscn" id="6_7mycd"]
 [ext_resource type="Texture2D" uid="uid://bs3hubedgsn4u" path="res://assets/punch.png" id="7_272bh"]
-[ext_resource type="Theme" uid="uid://bqdn1hl5c7fvl" path="res://assets/space-worm-theme/space_worm_theme.tres" id="8_4c57u"]
-[ext_resource type="Texture2D" uid="uid://b6dy30wwmhony" path="res://assets/Bat.png" id="9_kek77"]
-[ext_resource type="Texture2D" uid="uid://dbjehqnufhgkq" path="res://assets/throw.png" id="10_efxa6"]
 [ext_resource type="PackedScene" uid="uid://drjganthrvm2w" path="res://scenes/weapon_fist.tscn" id="7_weapon"]
+[ext_resource type="PackedScene" uid="uid://cx8rt8scyhwu6" path="res://scenes/weapon_ar.tscn" id="8_2cqfq"]
+[ext_resource type="Theme" uid="uid://bqdn1hl5c7fvl" path="res://assets/space-worm-theme/space_worm_theme.tres" id="8_4c57u"]
 [ext_resource type="PackedScene" uid="uid://cqosvbdp6a3lu" path="res://scenes/weapon_bat.tscn" id="8_bat"]
+[ext_resource type="Texture2D" uid="uid://b6dy30wwmhony" path="res://assets/Bat.png" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://bpt6p4b6g3ryt" path="res://scenes/weapon_pistol.tscn" id="9_pistol"]
+[ext_resource type="Texture2D" uid="uid://dbjehqnufhgkq" path="res://assets/throw.png" id="10_efxa6"]
+[ext_resource type="Texture2D" uid="uid://o0e6dah1hm3k" path="res://assets/gun.png" id="17_cegan"]
+[ext_resource type="AudioStream" uid="uid://c6t2bghvxh2x8" path="res://assets/sounds/Kevin MacLeod ~ Monkeys Spinning Monkeys.mp3" id="17_yaehf"]
+[ext_resource type="Texture2D" uid="uid://cjs3i8th62v71" path="res://assets/ak47.png" id="18_82xsv"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 
@@ -31,6 +36,7 @@ normal = Vector2(-1, 0)
 size = Vector2(574, 574)
 
 [node name="Node2D" type="Node2D" unique_id=450619373]
+script = ExtResource("1_82xsv")
 
 [node name="office" type="Sprite2D" parent="." unique_id=640592707]
 scale = Vector2(1.1, 1.1)
@@ -78,16 +84,19 @@ shape = SubResource("RectangleShape2D_h2yge")
 texture = ExtResource("1_ig7tw")
 offset = Vector2(0, -287)
 
-[node name="WeaponFist" parent="." instance=ExtResource("7_weapon")]
+[node name="WeaponFist" parent="." unique_id=1357382996 instance=ExtResource("7_weapon")]
 z_index = 10
 
-[node name="WeaponBat" parent="." instance=ExtResource("8_bat")]
+[node name="WeaponBat" parent="." unique_id=2066937072 instance=ExtResource("8_bat")]
 visible = false
 z_index = 10
 
-[node name="WeaponPistol" parent="." instance=ExtResource("9_pistol")]
+[node name="WeaponPistol" parent="." unique_id=81399128 instance=ExtResource("9_pistol")]
 visible = false
 z_index = 10
+
+[node name="WeaponAR" parent="." unique_id=2037980163 instance=ExtResource("8_2cqfq")]
+visible = false
 
 [node name="Drawing" type="Node2D" parent="." unique_id=1452194509]
 script = ExtResource("4_1bvp3")
@@ -164,6 +173,25 @@ fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Achievements" type="MarginContainer" parent="CanvasLayer" unique_id=206869688]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -184.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("8_4c57u")
+theme_override_constants/margin_bottom = 0
+
+[node name="Button" type="Button" parent="CanvasLayer/Achievements" unique_id=118315372]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Achievements"
 
 [node name="Shop" type="Control" parent="CanvasLayer" unique_id=877943886]
 layout_mode = 3
@@ -292,11 +320,11 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 30
 text = "Select"
 
-[node name="3" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=1998828728]
+[node name="2" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=1998828728]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Shop/GridContainer/3" unique_id=1774202813]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Shop/GridContainer/2" unique_id=1774202813]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -311,7 +339,7 @@ text = "Bat"
 fit_content = true
 autowrap_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Shop/GridContainer/3" unique_id=1350257732]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Shop/GridContainer/2" unique_id=1350257732]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = 8
@@ -328,7 +356,7 @@ grow_vertical = 2
 texture = ExtResource("9_kek77")
 expand_mode = 2
 
-[node name="Button" type="Button" parent="CanvasLayer/Shop/GridContainer/3" unique_id=2125770486]
+[node name="Button" type="Button" parent="CanvasLayer/Shop/GridContainer/2" unique_id=2125770486]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -344,17 +372,252 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 30
 text = "Select"
 
-[node name="Panel3" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=184731102]
+[node name="Cost" type="Button" parent="CanvasLayer/Shop/GridContainer/2" unique_id=86231997]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -151.0
+offset_right = 50.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Cost"
+
+[node name="3" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=1539615721]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 
-[node name="Panel4" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=843597278]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Shop/GridContainer/3" unique_id=488194286]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.5
+offset_top = 10.0
+offset_right = 24.5
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "Pistol"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Shop/GridContainer/3" unique_id=1287996951]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_cegan")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Shop/GridContainer/3" unique_id=2040511060]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -43.0
+offset_right = 50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Select"
+
+[node name="Cost" type="Button" parent="CanvasLayer/Shop/GridContainer/3" unique_id=1866322730]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -151.0
+offset_right = 50.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Cost"
+
+[node name="4" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=2118400790]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 
-[node name="Panel5" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=1068345049]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Shop/GridContainer/4" unique_id=1413255200]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.5
+offset_top = 10.0
+offset_right = 24.5
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "AK-47"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Shop/GridContainer/4" unique_id=700976289]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_82xsv")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Shop/GridContainer/4" unique_id=949828247]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -43.0
+offset_right = 50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Select"
+
+[node name="Cost" type="Button" parent="CanvasLayer/Shop/GridContainer/4" unique_id=968363903]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -151.0
+offset_right = 50.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Cost"
+
+[node name="5" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=472362761]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Shop/GridContainer/5" unique_id=2098526897]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.5
+offset_top = 10.0
+offset_right = 24.5
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "Bat"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Shop/GridContainer/5" unique_id=651454662]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_kek77")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Shop/GridContainer/5" unique_id=641551499]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -43.0
+offset_right = 50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Select"
+
+[node name="Cost" type="Button" parent="CanvasLayer/Shop/GridContainer/5" unique_id=1879005450]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -151.0
+offset_right = 50.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Cost"
+
+[node name="6" type="Panel" parent="CanvasLayer/Shop/GridContainer" unique_id=1807709213]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Shop/GridContainer/6" unique_id=729990172]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.5
+offset_top = 10.0
+offset_right = 24.5
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Select a weapon.
+You can also
+select unlocked
+weapons via
+number keys.
+0 = punch,
+1 = throw,
+etc."
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
 
 [node name="Selected" type="Panel" parent="CanvasLayer/Shop" unique_id=750158610]
 self_modulate = Color(0.76, 0.76, 0.76, 1)
@@ -403,3 +666,7 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "/\\"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1541399286]
+stream = ExtResource("17_yaehf")
+autoplay = true

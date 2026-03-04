@@ -8,7 +8,7 @@ func _physics_process(delta):
 		_time_freeze()
 
 func _draw():
-	if player.mode == 1 && player.clicked:
+	if (Global.weapon_mode == 1 or Global.weapon_mode == 2) && player.clicked:
 		draw_line(player.position_start, player.position_end, Color.BLUE, 8)
 		draw_line(player.position_start, player.position_start + player.vector, Color.RED, 16)
 	

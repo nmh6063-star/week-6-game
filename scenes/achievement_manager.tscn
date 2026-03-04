@@ -23,6 +23,8 @@ offset_right = 1920.0
 offset_bottom = 390.0
 text = "Happy anniversary"
 label_settings = SubResource("LabelSettings_1imxy")
+horizontal_alignment = 2
+text_direction = 1
 
 [node name="AchievementText" type="Label" parent="." unique_id=1544650606]
 layout_mode = 0
@@ -31,3 +33,4 @@ offset_right = 1920.0
 offset_bottom = 863.0
 text = "Reach a score of 1000"
 label_settings = SubResource("LabelSettings_1lgge")
+horizontal_alignment = 2

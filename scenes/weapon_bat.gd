@@ -3,8 +3,10 @@ extends Node2D
 @onready var bat_sprite: Sprite2D = $BatSprite
 
 var mark_texture = preload("res://assets/weapons/fist/mark.png")
+var bat_sound = preload("res://assets/sounds/bat_hit.mp3")
 var home_pos: Vector2
 var home_rotation: float = 0.0
+const audio = preload("res://scenes/audio_player.tscn")
 
 const SWING_ANGLE = -80.0
 const SWING_SPEED = 0.06
@@ -16,13 +18,17 @@ func _ready():
 	home_pos = bat_sprite.position
 
 func swing(target_global: Vector2, computer_sprite: Sprite2D) -> void:
+	var audio_player = audio.instantiate()
+	audio_player.stream = bat_sound
+	audio_player.pitch_scale = randf_range(0.9, 1.1)
+	add_child(audio_player)
 	var local_target = to_local(target_global)
 	var tween = create_tween()
 	tween.tween_property(bat_sprite, "position", local_target, SWING_SPEED)\
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.parallel().tween_property(bat_sprite, "rotation", deg_to_rad(SWING_ANGLE), SWING_SPEED)\
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_callback(_spawn_mark.bind(target_global, computer_sprite))
+	#tween.tween_callback(_spawn_mark.bind(target_global, computer_sprite))
 	tween.tween_property(bat_sprite, "position", home_pos, RETURN_SPEED)\
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.parallel().tween_property(bat_sprite, "rotation", home_rotation, RETURN_SPEED)\

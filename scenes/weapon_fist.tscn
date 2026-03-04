@@ -4,15 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://b08yfmyj0vbs3" path="res://assets/weapons/fist/right-fist.png" id="2_right"]
 [ext_resource type="Script" uid="uid://dlfno5fln3xp4" path="res://scenes/weapon_fist.gd" id="3_script"]
 
-[node name="WeaponFist" type="Node2D"]
+[node name="WeaponFist" type="Node2D" unique_id=3714167]
 script = ExtResource("3_script")
 
-[node name="LeftFist" type="Sprite2D" parent="."]
+[node name="LeftFist" type="Sprite2D" parent="." unique_id=660349550]
 position = Vector2(-350, 350)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_left")
 
-[node name="RightFist" type="Sprite2D" parent="."]
+[node name="RightFist" type="Sprite2D" parent="." unique_id=1632178091]
 position = Vector2(350, 350)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_right")

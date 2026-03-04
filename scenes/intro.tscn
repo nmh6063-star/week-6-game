@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://ctgn20cd8uleb"]
+
+[ext_resource type="Script" uid="uid://5dnqnxtamy5k" path="res://scenes/cutscene.gd" id="1_ioskq"]
+[ext_resource type="Texture2D" uid="uid://dd0b6gla15mvx" path="res://assets/Office_clear.jpg" id="2_yjqpq"]
+[ext_resource type="Theme" uid="uid://bqdn1hl5c7fvl" path="res://assets/space-worm-theme/space_worm_theme.tres" id="3_4bx60"]
+
+[sub_resource type="Animation" id="Animation_4bx60"]
+resource_name = "Intro_Scene"
+length = 15.033334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/MarginContainer/RichTextLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.29999998, 3.7, 4.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/MarginContainer/RichTextLabel2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.3, 4.366667, 11),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/MarginContainer/RichTextLabel3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.23333359, 11.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_i2l1n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/MarginContainer/RichTextLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/MarginContainer/RichTextLabel2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/MarginContainer/RichTextLabel3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wfs7u"]
+_data = {
+&"Intro_Scene": SubResource("Animation_4bx60"),
+&"RESET": SubResource("Animation_i2l1n")
+}
+
+[node name="Intro" type="Node2D" unique_id=1698818874]
+script = ExtResource("1_ioskq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1428263887]
+libraries/ = SubResource("AnimationLibrary_wfs7u")
+
+[node name="OfficeClear" type="Sprite2D" parent="." unique_id=467411302]
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_yjqpq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=355057142]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=182246357]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -250.0
+offset_right = 500.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_4bx60")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer" unique_id=57598087]
+custom_minimum_size = Vector2(1000, 500)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer" unique_id=655463359]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Your boss walks into your office.
+
+\"GET ME THIS MONTH'S FISCAL REPORT BY TOMORROW MORNING!\"
+
+This is the first time you're hearing of such a thing!
+How does your boss expect you to meet such a crazy
+deadline???"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/MarginContainer" unique_id=1634294646]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "John Business, the worst boss in the business.
+You wish you could beat the sh-crap out of him, but
+unfortunately assault and battery is outlawed in all
+50 states."
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/MarginContainer" unique_id=1031057504]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "So you turn to your next best option:
+Your company issued computer..."
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=508747647]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

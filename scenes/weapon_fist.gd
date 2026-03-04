@@ -16,24 +16,35 @@ const RETURN_SPEED = 0.25
 const MARK_FADE_TIME = 5.0
 const MARK_SCALE = Vector2(0.3, 0.3)
 
+const audio = preload("res://scenes/audio_player.tscn")
+var current_tween: Tween = null
+
 func _ready():
-	audio_player = AudioStreamPlayer.new()
-	audio_player.stream = punch_sound
-	add_child(audio_player)
 	left_home = left_fist.position
 	right_home = right_fist.position
 
-func punch(target_global: Vector2, computer_sprite: Sprite2D) -> void:
+func punch(target_global: Vector2, computer_sprite: Sprite2D, use_left) -> void:
+	if current_tween and current_tween.is_running():
+		current_tween.kill()
+		current_tween = null
+		
+		left_fist.position = left_home
+		right_fist.position = right_home
+		
+		is_left_punching = false
+		is_right_punching = false
+
+	var audio_player = audio.instantiate()
+	audio_player.stream = punch_sound
+	audio_player.pitch_scale = randf_range(0.9, 1.1)
+	add_child(audio_player)
+
 	var local_target = to_local(target_global)
-	var use_left = target_global.x < global_position.x
-	
-	if use_left and is_left_punching:
-		return
-	if !use_left and is_right_punching:
-		return
+	#var use_left = target_global.x < global_position.x
 	
 	var fist: Sprite2D
 	var home: Vector2
+	
 	if use_left:
 		fist = left_fist
 		home = left_home
@@ -43,20 +54,25 @@ func punch(target_global: Vector2, computer_sprite: Sprite2D) -> void:
 		home = right_home
 		is_right_punching = true
 	
-	var tween = create_tween()
-	tween.tween_property(fist, "position", local_target, PUNCH_SPEED)\
+	current_tween = create_tween()
+	current_tween.tween_property(fist, "position", local_target, PUNCH_SPEED)\
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_callback(func():
+	
+	current_tween.tween_callback(func():
 		audio_player.play()
-		_spawn_mark(target_global, computer_sprite)
+		if Global.weapon_mode == 0:
+			_spawn_mark(target_global, computer_sprite)
 	)
-	tween.tween_property(fist, "position", home, RETURN_SPEED)\
+	
+	current_tween.tween_property(fist, "position", home, RETURN_SPEED)\
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_callback(func():
+	
+	current_tween.tween_callback(func():
 		if use_left:
 			is_left_punching = false
 		else:
 			is_right_punching = false
+		current_tween = null
 	)
 
 func _spawn_mark(hit_global: Vector2, computer_sprite: Sprite2D) -> void:
@@ -66,6 +82,8 @@ func _spawn_mark(hit_global: Vector2, computer_sprite: Sprite2D) -> void:
 	mark.z_index = 1
 	var local_pos = computer_sprite.to_local(hit_global)
 	mark.position = local_pos
+	var scalar = randf_range(MARK_SCALE.x * 0.75, MARK_SCALE.x)
+	mark.scale = Vector2(scalar, scalar)
 	computer_sprite.add_child(mark)
 	
 	var fade_tween = create_tween()
