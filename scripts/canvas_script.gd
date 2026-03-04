@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var label = get_node("MarginContainer/Label")
 @onready var label2 = get_node("MarginContainer2/RichTextLabel")
 @onready var label3 = get_node("MarginContainer3/RichTextLabel")
+@onready var achievement = $AchievementManager
 
 var size = 16
 var sizeVal = float(size)
@@ -34,3 +35,5 @@ func _process(delta):
 	label3.text = "[font_size=" + str(flavorText) + "]" + modifier + "[/font_size]"
 	flavorText = lerp(flavorText, float(flavorTextRoot), 10.0 * delta)
 	sizeVal = lerp(sizeVal, float(size), 5.0 * delta)
+	if Global.score >= achievement.next_score:
+		achievement.display()

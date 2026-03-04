@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://b1ti5dggvo4o6" path="res://scripts/canvas_script.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://brps2ypi3vr3p" path="res://scripts/drawing.gd" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://co2301d2tye5n" path="res://scripts/camera_script.gd" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://bqkfqvn7e4dku" path="res://scenes/achievement_manager.tscn" id="6_7mycd"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 
@@ -67,6 +68,10 @@ script = ExtResource("4_lquwl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1242209693]
 script = ExtResource("3_h2yge")
+
+[node name="AchievementManager" parent="CanvasLayer" unique_id=1789878873 instance=ExtResource("6_7mycd")]
+position = Vector2(1523, 1096)
+scale = Vector2(0.2, 0.2)
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=338304668]
 anchors_preset = 5

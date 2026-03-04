@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bqkfqvn7e4dku"]
+
+[ext_resource type="Script" uid="uid://cfr15sikd8a7a" path="res://scripts/achievement_manager.gd" id="1_1imxy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1imxy"]
+font_size = 210
+outline_size = 49
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1lgge"]
+font_size = 119
+outline_size = 35
+outline_color = Color(0, 0, 0, 1)
+
+[node name="AchievementManager" type="Node2D" unique_id=1789878873]
+script = ExtResource("1_1imxy")
+
+[node name="AchievementName" type="Label" parent="." unique_id=104870263]
+offset_right = 1920.0
+offset_bottom = 390.0
+text = "Happy anniversary"
+label_settings = SubResource("LabelSettings_1imxy")
+
+[node name="AchievementText" type="Label" parent="." unique_id=1544650606]
+offset_top = 415.0
+offset_right = 1920.0
+offset_bottom = 863.0
+text = "Reach a score of 1000"
+label_settings = SubResource("LabelSettings_1lgge")
