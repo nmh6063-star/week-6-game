@@ -17,9 +17,14 @@
 [ext_resource type="Texture2D" uid="uid://b6dy30wwmhony" path="res://assets/Bat.png" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://bpt6p4b6g3ryt" path="res://scenes/weapon_pistol.tscn" id="9_pistol"]
 [ext_resource type="Texture2D" uid="uid://dbjehqnufhgkq" path="res://assets/throw.png" id="10_efxa6"]
+[ext_resource type="Texture2D" uid="uid://dxvxqhwbexinn" path="res://assets/Target.png" id="12_d13ii"]
+[ext_resource type="Texture2D" uid="uid://c6v2d17cj1esx" path="res://assets/table.png" id="12_ryguw"]
+[ext_resource type="Script" uid="uid://bdbdnb7tfaun5" path="res://target.gd" id="13_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://o0e6dah1hm3k" path="res://assets/gun.png" id="17_cegan"]
 [ext_resource type="AudioStream" uid="uid://c6t2bghvxh2x8" path="res://assets/sounds/Kevin MacLeod ~ Monkeys Spinning Monkeys.mp3" id="17_yaehf"]
 [ext_resource type="Texture2D" uid="uid://cjs3i8th62v71" path="res://assets/ak47.png" id="18_82xsv"]
+[ext_resource type="Texture2D" uid="uid://snpjh0fjnues" path="res://assets/Sniper.png" id="19_getpj"]
+[ext_resource type="PackedScene" uid="uid://c20e74vvo87iq" path="res://scenes/weapon_sniper.tscn" id="25_0odxb"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 
@@ -65,6 +70,11 @@ shape = SubResource("WorldBoundaryShape2D_lquwl")
 position = Vector2(960, 1)
 shape = SubResource("WorldBoundaryShape2D_7mycd")
 
+[node name="Table" type="Sprite2D" parent="." unique_id=610884023]
+position = Vector2(21.00003, 571.7)
+scale = Vector2(3.920001, 1.499388)
+texture = ExtResource("12_ryguw")
+
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1255901693]
 position = Vector2(0, 200)
 scale = Vector2(0.5, 0.5)
@@ -94,12 +104,19 @@ z_index = 10
 [node name="WeaponPistol" parent="." unique_id=81399128 instance=ExtResource("9_pistol")]
 visible = false
 z_index = 10
+position = Vector2(0, 30)
 
 [node name="WeaponAR" parent="." unique_id=2037980163 instance=ExtResource("8_2cqfq")]
 visible = false
+position = Vector2(0, 30)
 
 [node name="Drawing" type="Node2D" parent="." unique_id=1452194509]
 script = ExtResource("4_1bvp3")
+
+[node name="Target" type="Sprite2D" parent="." unique_id=1607761808]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("12_d13ii")
+script = ExtResource("13_1u8w0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2118857758]
 script = ExtResource("4_lquwl")
@@ -107,93 +124,8 @@ script = ExtResource("4_lquwl")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1242209693]
 script = ExtResource("3_h2yge")
 
-[node name="AchievementManager" parent="CanvasLayer" unique_id=1789878873 instance=ExtResource("6_7mycd")]
-visible = false
-offset_left = 1523.0
-offset_top = 1096.0
-offset_right = 1523.0
-offset_bottom = 1096.0
-scale = Vector2(0.2, 0.2)
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=338304668]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
-grow_horizontal = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/MarginContainer" unique_id=161373058]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Score"
-horizontal_alignment = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer" unique_id=5723307]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -43.0
-offset_top = -20.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/margin_right = 100
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer2" unique_id=2049481310]
-layout_mode = 2
-bbcode_enabled = true
-text = "combo"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer" unique_id=957508603]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 450
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer3" unique_id=38743191]
-layout_mode = 2
-bbcode_enabled = true
-text = "test"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Achievements" type="MarginContainer" parent="CanvasLayer" unique_id=206869688]
-custom_minimum_size = Vector2(100, 100)
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -184.0
-offset_top = -100.0
-grow_horizontal = 0
-grow_vertical = 0
-theme = ExtResource("8_4c57u")
-theme_override_constants/margin_bottom = 0
-
-[node name="Button" type="Button" parent="CanvasLayer/Achievements" unique_id=118315372]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Achievements"
-
 [node name="Shop" type="Control" parent="CanvasLayer" unique_id=877943886]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -539,7 +471,7 @@ offset_right = 24.5
 offset_bottom = 50.0
 grow_horizontal = 2
 theme_override_font_sizes/normal_font_size = 50
-text = "Bat"
+text = "Sniper"
 fit_content = true
 autowrap_mode = 0
 
@@ -557,7 +489,7 @@ offset_right = 125.0
 offset_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("9_kek77")
+texture = ExtResource("19_getpj")
 expand_mode = 2
 
 [node name="Button" type="Button" parent="CanvasLayer/Shop/GridContainer/5" unique_id=641551499]
@@ -612,8 +544,8 @@ You can also
 select unlocked
 weapons via
 number keys.
-0 = punch,
-1 = throw,
+1 = punch,
+2 = throw,
 etc."
 fit_content = true
 autowrap_mode = 0
@@ -647,6 +579,125 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
+[node name="Achievements" type="Control" parent="CanvasLayer" unique_id=289587283]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Achievements" unique_id=1177357990]
+custom_minimum_size = Vector2(2000, 1100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("8_4c57u")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Achievements" unique_id=1361725693]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = 1859.0
+offset_bottom = 860.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_4c57u")
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Achievements/ScrollContainer" unique_id=1840155435]
+layout_mode = 2
+theme = ExtResource("8_4c57u")
+theme_override_constants/h_separation = 100
+theme_override_constants/v_separation = 50
+
+[node name="AchievementManager" parent="CanvasLayer" unique_id=1789878873 instance=ExtResource("6_7mycd")]
+visible = false
+offset_left = 1523.0
+offset_top = 1096.0
+offset_right = 1523.0
+offset_bottom = 1096.0
+scale = Vector2(0.2, 0.2)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=338304668]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer" unique_id=161373058]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Score"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer" unique_id=5723307]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_right = 100
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer2" unique_id=2049481310]
+layout_mode = 2
+bbcode_enabled = true
+text = "combo"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer" unique_id=957508603]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 450
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer3" unique_id=38743191]
+layout_mode = 2
+bbcode_enabled = true
+text = "test"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Achievo" type="MarginContainer" parent="CanvasLayer" unique_id=206869688]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -184.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("8_4c57u")
+theme_override_constants/margin_bottom = 0
+
+[node name="Button" type="Button" parent="CanvasLayer/Achievo" unique_id=118315372]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Achievements"
+
 [node name="Shop Toggle" type="MarginContainer" parent="CanvasLayer" unique_id=2039425537]
 custom_minimum_size = Vector2(100, 100)
 anchors_preset = 7
@@ -670,3 +721,6 @@ text = "/\\"
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1541399286]
 stream = ExtResource("17_yaehf")
 autoplay = true
+
+[node name="WeaponSniper" parent="." unique_id=1432609940 instance=ExtResource("25_0odxb")]
+position = Vector2(0, 135)

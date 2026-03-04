@@ -9,11 +9,14 @@ extends CanvasLayer
 @onready var shop = get_node("Shop")
 @onready var grid = get_node("Shop/GridContainer")
 @onready var select_item = get_node("Shop/GridContainer/0")
+@onready var achievo = get_node("Achievo/Button")
+@onready var achievements = get_node("Achievements")
 
 const audio = preload("res://scenes/audio_player.tscn")
 var error = preload("res://assets/sounds/error.wav")
 var cash = preload("res://assets/sounds/cash.wav")
 var select = preload("res://assets/sounds/select.wav")
+var achieve = preload("res://scenes/achieve.tscn")
 
 var size = 16
 var sizeVal = float(size)
@@ -27,6 +30,16 @@ var children = []
 @onready var player = get_node("/root/Node2D/Player")
 
 func _ready():
+	achievo.connect("pressed", _achievo_toggle)
+	achievements.visible = false
+	var base = get_node("Achievements/ScrollContainer/GridContainer")
+	for a in Global.achievements:
+		var inst = achieve.instantiate()
+		inst.find_child("Title").text = Global.achievements[a][0]
+		inst.find_child("Desc").text = Global.achievements[a][1]
+		inst.name = str(a)
+		base.add_child(inst)
+		
 	shop.visible = false
 	shop_toggle.connect("pressed", _shop_toggle)
 	children = grid.get_children()
@@ -47,7 +60,20 @@ func _ready():
 				cost.connect("pressed", func(): self._pricing(child.name, pow(10, int(child.name)) + 500, cost, button, rect))
 				
 				
-	
+
+func _achievo_toggle():
+	achievements.visible = !achievements.visible
+	player.operate = !player.operate
+	if achievements.visible:
+		var base = get_node("Achievements/ScrollContainer/GridContainer")
+		var children = base.get_children()
+		for c in children:
+			if Global.achievements[int(c.name)][2] == false:
+				c.modulate = Color(0.5, 0.5, 0.5, 1.0)
+			else:
+				c.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+
 func _set_mode(mode, select):
 	Global.weapon_mode = int(mode)
 	select_item = select
@@ -61,7 +87,7 @@ func _pricing(mode, cost, obj, button, rect):
 		Global.score -= cost
 		button.disabled = false
 		rect.modulate = Color.from_hsv(0.0, 0.0, 1.0, 1.0)
-		Global.unlocked.append(mode)
+		Global.unlocked.append(int(mode))
 		var audio_player = audio.instantiate()
 		audio_player.stream = cash
 		add_child(audio_player)
@@ -73,6 +99,7 @@ func _pricing(mode, cost, obj, button, rect):
 
 func _shop_toggle():
 	shop.visible = !shop.visible
+	player.operate = !player.operate
 	if shop.visible:
 		shop_toggle.text = "\\/"
 	else:
@@ -81,6 +108,18 @@ func _shop_toggle():
 				
 
 func _process(delta):
+	if achievements.visible:
+		shop_toggle.visible = false
+		shop_toggle.disabled = true
+	else:
+		shop_toggle.visible = true
+		shop_toggle.disabled = false
+	if shop.visible:
+		achievo.visible = false
+		achievo.disabled = true
+	else:
+		achievo.visible = true
+		achievo.disabled = false
 	label.text = str(int(Global.score))
 	if Global.combo > 0:
 		label2.text = "[font_size=" + str(sizeVal*2) + "]" + str(Global.combo) + "[/font_size][font_size=" + str(sizeVal) + "]hits[/font_size]"

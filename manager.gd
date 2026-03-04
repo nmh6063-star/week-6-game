@@ -30,6 +30,9 @@ func _physics_process(delta):
 	if Global.combo > 49 and Global.achievements[6][2] == false:
 		Global.achievements[6][2] = true
 		display.display(6)
+	elif Global.combo > 999 and Global.achievements[13][2] == false:
+		Global.achievements[13][2] = true
+		display.display(13)
 	if Global.wallBounceCount > 3 and Global.achievements[8][2] == false:
 		Global.achievements[8][2] = true
 		display.display(8)
@@ -37,4 +40,27 @@ func _physics_process(delta):
 	if Global.switch > 2 and Global.achievements[9][2] == false:
 		Global.achievements[9][2] = true
 		display.display(9)
+	if Global.switch > 0 and Global.weapon_mode == 3 and Global.achievements[5][2] == false:
+		Global.achievements[5][2] = true
+		display.display(5)
+	
+	if Global.unlocked.has(2) and Global.achievements[10][2] == false:
+		Global.achievements[10][2] = true
+		display.display(10)
+	elif Global.unlocked.has(3) and Global.achievements[11][2] == false:
+		Global.achievements[11][2] = true
+		display.display(11)
+	elif Global.unlocked.has(4) and Global.achievements[12][2] == false:
+		Global.achievements[12][2] = true
+		display.display(12)
+	elif Global.unlocked.has(5) and Global.achievements[15][2] == false:
+		Global.achievements[15][2] = true
+		display.display(15)
+		
+	if Global.wallBounceCount > 99 and Global.combo < 151 and Global.achievements[14][2] == false:
+		Global.achievements[14][2] = true
+		display.display(14)
+	if Global.combo > 999 and Global.switch > 14 and Global.achievements[16][2] == false:
+		Global.achievements[16][2] = true
+		display.display(16)
 		

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c20e74vvo87iq"]
+
+[ext_resource type="Script" uid="uid://b02rqdh5ieepe" path="res://scenes/weapon_sniper.gd" id="1_q545j"]
+[ext_resource type="Texture2D" uid="uid://cy50x5jjn1tsa" path="res://assets/sniper_weapon.png" id="2_xa1st"]
+
+[node name="WeaponSniper" type="Node2D" unique_id=2037980163]
+script = ExtResource("1_q545j")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1733509604]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_xa1st")

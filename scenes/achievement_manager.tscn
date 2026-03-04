@@ -19,15 +19,17 @@ script = ExtResource("1_1imxy")
 
 [node name="AchievementName" type="Label" parent="." unique_id=104870263]
 layout_mode = 0
+offset_left = -3033.0
 offset_right = 1920.0
 offset_bottom = 390.0
 text = "Happy anniversary"
 label_settings = SubResource("LabelSettings_1imxy")
 horizontal_alignment = 2
-text_direction = 1
+text_direction = 2
 
 [node name="AchievementText" type="Label" parent="." unique_id=1544650606]
 layout_mode = 0
+offset_left = -2481.0
 offset_top = 415.0
 offset_right = 1920.0
 offset_bottom = 863.0

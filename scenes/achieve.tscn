@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cwr7px14kbvr6"]
+
+[node name="Achieve" type="Panel" unique_id=1661942622]
+custom_minimum_size = Vector2(1800, 150)
+
+[node name="Title" type="RichTextLabel" parent="." unique_id=2051604499]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -889.5
+offset_top = 10.0
+offset_right = 880.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "test"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Desc" type="RichTextLabel" parent="." unique_id=1674973706]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -887.0
+offset_top = 71.0
+offset_right = 867.0
+offset_bottom = 120.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 35
+text = "test"
+fit_content = true
+autowrap_mode = 0

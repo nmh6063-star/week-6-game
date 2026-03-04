@@ -18,7 +18,8 @@ func _process(delta):
 	if trauma > 0.0:
 		trauma = max(trauma - shake_decay * delta, 0.0)
 		noise_time += delta * noise_speed
-		_apply_shake()
+		if Global.shake:
+			_apply_shake()
 	else:
 		offset = Vector2.ZERO
 		rotation_degrees = 0.0
