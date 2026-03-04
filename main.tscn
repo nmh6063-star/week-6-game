@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://brps2ypi3vr3p" path="res://scripts/drawing.gd" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://co2301d2tye5n" path="res://scripts/camera_script.gd" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bqkfqvn7e4dku" path="res://scenes/achievement_manager.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://drjganthrvm2w" path="res://scenes/weapon_fist.tscn" id="7_weapon"]
+[ext_resource type="PackedScene" uid="uid://cqosvbdp6a3lu" path="res://scenes/weapon_bat.tscn" id="8_bat"]
+[ext_resource type="PackedScene" uid="uid://bpt6p4b6g3ryt" path="res://scenes/weapon_pistol.tscn" id="9_pistol"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 
@@ -59,6 +62,17 @@ shape = SubResource("RectangleShape2D_h2yge")
 [node name="Computer" type="Sprite2D" parent="Player" unique_id=259497910]
 texture = ExtResource("1_ig7tw")
 offset = Vector2(0, -287)
+
+[node name="WeaponFist" parent="." instance=ExtResource("7_weapon")]
+z_index = 10
+
+[node name="WeaponBat" parent="." instance=ExtResource("8_bat")]
+visible = false
+z_index = 10
+
+[node name="WeaponPistol" parent="." instance=ExtResource("9_pistol")]
+visible = false
+z_index = 10
 
 [node name="Drawing" type="Node2D" parent="." unique_id=1452194509]
 script = ExtResource("4_1bvp3")

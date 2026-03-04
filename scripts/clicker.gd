@@ -14,6 +14,22 @@ var vector = Vector2.ZERO
 var mode = 0
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("weapon_fist"):
+		Global.weapon_mode = 0
+	if Input.is_action_just_pressed("weapon_bat"):
+		Global.weapon_mode = 1
+	if Input.is_action_just_pressed("weapon_pistol"):
+		Global.weapon_mode = 2
+	var weapon_fist = get_node_or_null("/root/Node2D/WeaponFist")
+	var weapon_bat = get_node_or_null("/root/Node2D/WeaponBat")
+	var weapon_pistol = get_node_or_null("/root/Node2D/WeaponPistol")
+	if weapon_fist:
+		weapon_fist.visible = Global.weapon_mode == 0
+	if weapon_bat:
+		weapon_bat.visible = Global.weapon_mode == 1
+	if weapon_pistol:
+		weapon_pistol.visible = Global.weapon_mode == 2
+
 	# get the Physics2DDirectSpaceState object
 	var space = get_world_2d().direct_space_state
 	# Get the mouse's position
@@ -30,7 +46,7 @@ func _physics_process(delta):
 	var parameters = PhysicsPointQueryParameters2D.new()
 	parameters.position = mousePos
 	parameters.collide_with_areas = true
-	parameters.collide_with_bodies = true
+	parameters.collide_with_bodies = false
 	# Check if there is a collision at the mouse position
 	var intersection = space.intersect_point(parameters)
 	if intersection && Input.is_action_just_pressed("click"):
@@ -39,6 +55,19 @@ func _physics_process(delta):
 			Global.score += 1
 			velocity = Vector2.ZERO
 			velocity -= Vector2(force * percent_x, force + force * percent_y)
+			var computer = get_node("Computer")
+			if Global.weapon_mode == 0:
+				var weapon = get_node_or_null("/root/Node2D/WeaponFist")
+				if weapon:
+					weapon.punch(mousePos, computer)
+			elif Global.weapon_mode == 1:
+				var weapon = get_node_or_null("/root/Node2D/WeaponBat")
+				if weapon:
+					weapon.swing(mousePos, computer)
+			elif Global.weapon_mode == 2:
+				var weapon = get_node_or_null("/root/Node2D/WeaponPistol")
+				if weapon:
+					weapon.fire(mousePos, computer)
 			var inst = particles.instantiate()
 			inst.position = mousePos
 			get_node("/root/Node2D").add_child(inst)
